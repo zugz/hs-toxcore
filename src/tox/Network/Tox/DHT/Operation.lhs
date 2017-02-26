@@ -4,7 +4,7 @@
 {-# LANGUAGE FlexibleContexts      #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE NamedFieldPuns        #-}
-{-# LANGUAGE Safe                  #-}
+{-# LANGUAGE Trustworthy           #-}
 {-# LANGUAGE ScopedTypeVariables   #-}
 module Network.Tox.DHT.Operation where
 
