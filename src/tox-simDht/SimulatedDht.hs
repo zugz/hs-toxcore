@@ -133,6 +133,14 @@ handlePacket from bytes =
       PacketKind.Crypto ->
         Encoding.decode payload >>=
           lift . DhtOperation.handleDhtRequestPacket from
+      PacketKind.PingRequest ->
+        Encoding.decode payload >>=
+          MaybeT . DhtPacket.decodeKeyed keyPair >>=
+          lift . DhtOperation.handlePingRequest from
+      PacketKind.PingResponse ->
+        Encoding.decode payload >>=
+          MaybeT . DhtPacket.decodeKeyed keyPair >>=
+          lift . DhtOperation.handlePingResponse from
       PacketKind.NodesRequest ->
         Encoding.decode payload >>=
           MaybeT . DhtPacket.decodeKeyed keyPair >>=
