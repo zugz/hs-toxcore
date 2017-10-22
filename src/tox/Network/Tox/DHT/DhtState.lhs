@@ -119,9 +119,9 @@ empty time keyPair =
 
 \subsection{DHT Search Entry}
 
-A DHT Search Entry contains a Client List with base key the searched node's
-Public Key.  Once the searched node is found, it is also stored in the Search
-Entry.
+A DHT Search Entry contains a Client List, the base key of which is the
+searched node's Public Key.  Once the searched node is found, it is also
+stored in the Search Entry.
 
 The maximum size of the Client List is set to 8.
 (Must be the same or smaller than the bucket size of the close list to make
@@ -206,7 +206,7 @@ containsSearchKey searchKey =
 
 \end{code}
 
-\input{NodeList.lhs}
+\input{src/tox/Network/Tox/DHT/NodeList.lhs}
 
 The iteration order over the DHT state is to first process the Close List
 k-buckets, then the Search List entry Client Lists. Each of these follows the

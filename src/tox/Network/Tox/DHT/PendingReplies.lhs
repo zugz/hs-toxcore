@@ -1,7 +1,7 @@
 \subsection{Replies to RPC requests}
-A \textit{reply} to a Request packet is a Response packet with the Request ID in
+A \textit{Reply} to a Request packet is a Response packet with the Request ID in
 the Response packet set equal to the Request ID in the Request packet.  A
-response is accepted if and only if it is the first received reply to a request
+response is accepted if and only if it is the first received Reply to a request
 which was sent sufficiently recently, according to a time limit which depends on
 the service.
 

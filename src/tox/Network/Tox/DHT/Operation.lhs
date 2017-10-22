@@ -196,10 +196,10 @@ bootstrapNode nodeInfo =
 \end{code}
 
 \subsection{Periodic sending of Nodes Requests}
-For each Nodes List in the DHT State, every 20 seconds we send a Nodes Request
+For each Node List in the DHT State, every 20 seconds we send a Nodes Request
 to a random node on the list, searching for the base key of the list.
 
-When a Nodes List first becomes populated with nodes, we send 5 such random
+When a Node List first becomes populated with nodes, we send 5 such random
 Nodes Requests in quick succession.
 
 Random nodes are chosen since being able to predict which node a node will
@@ -245,7 +245,7 @@ randomRequests = do
 \end{code}
 
 Furthermore, we periodically check every node for responsiveness by sending it a
-Nodes Request: for each Nodes List in the DHT State, we send each node on the
+Nodes Request: for each Node List in the DHT State, we send each node on the
 list a Nodes Request every 60 seconds, searching for the base key of the list.
 We remove from the DHT State any node from which we persistently fail to receive
 Nodes Responses.
@@ -264,7 +264,7 @@ that every node in the Close List is Bad, they are all checked once more.)
 
 hs-toxcore implementation of checking and timeouts:
 We maintain a Last Checked timestamp and a Checks Counter on each node on each
-Nodes List in the Dht State. When a node is added to a list, these are set
+Node List in the Dht State. When a node is added to a list, these are set
 respectively to the current time and to 0. This includes updating an already
 present node. We periodically pass through the nodes on the lists, and for each
 which is due a check, we: check it, update the timestamp, increment the counter,
@@ -319,15 +319,15 @@ doDHT =
 \end{code}
 
 \subsection{Handling Nodes Response packets}
-When we receive a valid Nodes Response packet, we first check that it is a reply
+When we receive a valid Nodes Response packet, we first check that it is a Reply
 to a Nodes Request which we sent within the last 60 seconds to the node from
-which we received the response, and that no previous reply has been received. If
+which we received the response, and that no previous Reply has been received. If
 this check fails, the packet is ignored. If the check succeeds, first we add to
 the DHT State the node from which the response was sent. Then, for each node
-listed in the response and for each Nodes List in the DHT State which does not
+listed in the response and for each Node List in the DHT State which does not
 currently contain the node and to which the node is viable for entry, we send a
 Nodes Request to the node with the requested public key being the base key of
-the Nodes List.
+the Node List.
 
 (NOTE: in fact c-toxcore currently checks that the node isn't already in
 the node list only for search lists, not for the close list. See #511.)
@@ -359,11 +359,11 @@ handleNodesResponse from (RpcPacket (NodesResponse nodes) requestId) = do
 \end{code}
 
 \subsection{Handling Nodes Request packets}
-When we receive a Nodes Request packet from another node, we reply with a Nodes
-Response packet containing the 4 nodes in the DHT State which are the closest to
-the public key in the packet. If there are fewer than 4 nodes in the state, we
-reply with all the nodes in the state. If there are no nodes in the state, no
-reply is sent.
+When we receive a Nodes Request packet from another node, we send as a Reply a
+Nodes Response packet containing the 4 nodes in the DHT State which are the
+closest to the public key in the packet. If there are fewer than 4 nodes in
+the state, we send all the nodes in the state. If there are no nodes in the
+state, no Reply is sent.
 
 We also send a Ping Request when this is appropriate; see below.
 
